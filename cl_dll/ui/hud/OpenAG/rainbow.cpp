@@ -11,12 +11,12 @@
 void CRainbow::Init()
 {
     // Register cvars
-    m_pCvarRainbow = CVAR_CREATE("hud_rainbow", "0", FCVAR_ARCHIVE);
+    m_pCvarRainbow = CVAR_CREATE("hud_rainbow", "1", FCVAR_ARCHIVE);
     m_pCvarRainbowS = CVAR_CREATE("hud_rainbow_sat", "100", FCVAR_ARCHIVE);
     m_pCvarRainbowV = CVAR_CREATE("hud_rainbow_val", "100", FCVAR_ARCHIVE);
-    m_pCvarRainbowSpeed = CVAR_CREATE("hud_rainbow_speed", "40", FCVAR_ARCHIVE);
-    m_pCvarRainbowXPhase = CVAR_CREATE("hud_rainbow_xphase", "0.4", FCVAR_ARCHIVE);
-    m_pCvarRainbowYPhase = CVAR_CREATE("hud_rainbow_yphase", "0.7", FCVAR_ARCHIVE);
+    m_pCvarRainbowSpeed = CVAR_CREATE("hud_rainbow_speed", "105", FCVAR_ARCHIVE);
+    m_pCvarRainbowXPhase = CVAR_CREATE("hud_rainbow_xphase", "1", FCVAR_ARCHIVE);
+    m_pCvarRainbowYPhase = CVAR_CREATE("hud_rainbow_yphase", "1", FCVAR_ARCHIVE);
 
     // Save engine functions
     m_pfnSPR_Set = gEngfuncs.pfnSPR_Set;

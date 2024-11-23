@@ -23,7 +23,7 @@ int CHudStrafeGuide::Init()
 	m_iFlags = HUD_ACTIVE;
 
 	hud_strafeguide = CVAR_CREATE("hud_strafeguide", "0", FCVAR_ARCHIVE);
-	hud_strafeguide_zoom = CVAR_CREATE("hud_strafeguide_zoom", "1", FCVAR_ARCHIVE);
+	hud_strafeguide_zoom = CVAR_CREATE("hud_strafeguide_zoom", "0", FCVAR_ARCHIVE);
 	hud_strafeguide_height = CVAR_CREATE("hud_strafeguide_height", "0", FCVAR_ARCHIVE);
 	hud_strafeguide_size = CVAR_CREATE("hud_strafeguide_size", "0", FCVAR_ARCHIVE);
 

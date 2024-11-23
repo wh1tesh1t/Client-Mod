@@ -10,7 +10,7 @@ int CHudSpeedometer::Init()
 {
 	m_iFlags = HUD_ACTIVE;
 
-	hud_speedometer = CVAR_CREATE("hud_speedometer", "0", FCVAR_ARCHIVE);
+	hud_speedometer = CVAR_CREATE("hud_speedometer", "1", FCVAR_ARCHIVE);
 	hud_speedometer_below_cross = CVAR_CREATE("hud_speedometer_below_cross", "0", FCVAR_ARCHIVE);
 
 	gHUD.AddHudElem( this );
