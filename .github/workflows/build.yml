@@ -135,7 +135,7 @@ jobs:
           tag_name: continuous
           delete_release: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          repo: Elinsrc/Client-Mod
+          repo: wh1tesh1t/Client-Mod
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Repackage binaries
@@ -153,7 +153,7 @@ jobs:
       - name: Upload new release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_name: Elinsrc/Client-Mod
+          repo_name: wh1tesh1t/Client-Mod
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file_glob: true
           file: artifacts/*.zip
