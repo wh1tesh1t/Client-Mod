@@ -92,9 +92,7 @@ struct HUDLIST
 
 //
 //-----------------------------------------------------
-#if USE_VGUI
 #include "voice_status.h" // base voice handling class
-#endif
 #include "hud_spectator.h"
 #include "hud_speedometer.h"
 #include "hud_jumpspeed.h"
@@ -279,6 +277,8 @@ private:
 	}icon_flagstatus_t;
 
 	icon_flagstatus_t m_IconFlagScore;
+
+	HSPRITE iVoiceSprite;
 };
 #endif
 
@@ -600,9 +600,9 @@ public:
 	int DrawHudNumber( int x, int y, int iNumber, int r, int g, int b );
 	int DrawHudNumberCentered( int x, int y, int iNumber, int r, int g, int b );
 	int DrawHudString( int x, int y, const char *szString, int r, int g, int b );
-	int DrawHudStringReverse( int xpos, int ypos, int iMinX, const char *szString, int r, int g, int b );
+	int DrawHudStringReverse( int xpos, int ypos, const char *szString, int r, int g, int b );
 	int DrawHudNumberString( int xpos, int ypos, int iNumber, int r, int g, int b );
-	int DrawHudNumberStringReverse( int xpos, int ypos, int iMinX, int iNumber, int r, int g, int b );
+	int DrawHudNumberStringReverse( int xpos, int ypos, int iNumber, int r, int g, int b );
 	int GetNumWidth( int iNumber, int iFlags );
 	int DrawHudStringLen( const char *szIt );
 	int GetHudStringWidth(const char* string);

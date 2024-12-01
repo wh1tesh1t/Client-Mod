@@ -1,9 +1,9 @@
 /***
 *
 *	Copyright (c) 1999, Valve LLC. All rights reserved.
-*	
-*	This product contains software technology licensed from Id 
-*	Software, Inc. ("Id Technology").  Id Technology (c) 1996 Id Software, Inc. 
+*
+*	This product contains software technology licensed from Id
+*	Software, Inc. ("Id Technology").  Id Technology (c) 1996 Id Software, Inc.
 *	All Rights Reserved.
 *
 *   Use, distribution, and modification of this source code and/or resulting
@@ -113,7 +113,7 @@ We have a minimum width of 1-320 - we could have the field widths scale with it?
 #define PL_RANGE_MIN 315
 #define PL_RANGE_MAX 375
 #define MODEL_RANGE_MIN 0
-#define LOSS_POSS 390
+#define VOICE_POS 350
 
 int SCOREBOARD_WIDTH = 320;
 
@@ -131,12 +131,12 @@ int CHudScoreboard::Draw( float fTime )
 
 	if( !m_iShowscoresHeld && gHUD.m_Health.m_iHealth > 0 && !gHUD.m_iIntermission )
 		return 1;
-	
+
 	gHUD.m_iNoConsolePrint |= 1 << 0;
 
 	GetAllPlayersInfo();
 
-	SCOREBOARD_WIDTH = ( ScreenWidth >= 440 ) ? ( 320 - NAME_RANGE_MODIFIER ) : 320;
+	SCOREBOARD_WIDTH = ( ScreenWidth >= 520 ) ? ( 400 - NAME_RANGE_MODIFIER ) : 400;
 
 	// just sort the list on the fly
 	// list is sorted first by frags, then by deaths
@@ -147,7 +147,7 @@ int CHudScoreboard::Draw( float fTime )
 	int ypos = ROW_TOP + ROW_RANGE_MIN + ( list_slot * ROW_GAP );
 	int xpos = NAME_RANGE_MIN + xpos_rel;
 
-	FAR_RIGHT = PING_RANGE_MAX + 5;
+	FAR_RIGHT = VOICE_POS + 5;
 
 	if( ( ScreenWidth >= 440 ) || ( ScreenWidth >= 520 ) )
 	{
@@ -165,7 +165,7 @@ int CHudScoreboard::Draw( float fTime )
 		snprintf(ServerName,80,"%s",gHUD.m_szServerName );
 	gHUD.DrawHudStringWithColorTags( xpos, info_pos, ServerName, 255, 140, 0 );
 
-	int COUNT_PLAYERS_POS = 310;
+	int COUNT_PLAYERS_POS = 365;
 
 	char map[256];
 	char map_name[64];
@@ -175,7 +175,7 @@ int CHudScoreboard::Draw( float fTime )
 
 	char player_count[256];
 	sprintf(player_count, "%d/%d", get_player_count(), gEngfuncs.GetMaxClients());
-	gHUD.DrawHudStringReverse( COUNT_PLAYERS_POS + xpos_rel, info_pos, 0, player_count, 255, 140, 0 );
+	gHUD.DrawHudStringReverse( COUNT_PLAYERS_POS + xpos_rel, info_pos, player_count, 255, 140, 0 );
 
 	if( !gHUD.m_Teamplay )
 	{
@@ -185,10 +185,11 @@ int CHudScoreboard::Draw( float fTime )
 	else
 		gHUD.DrawHudString( xpos, ypos, CHudTextMessage::BufferedLocaliseTextString("#TEAMS"), 255, 140, 0 );
 
-	gHUD.DrawHudStringReverse( KILLS_RANGE_MAX + xpos_rel, ypos, 0, CHudTextMessage::BufferedLocaliseTextString("#SCORE"), 255, 140, 0 );
+	gHUD.DrawHudStringReverse( KILLS_RANGE_MAX + xpos_rel, ypos, CHudTextMessage::BufferedLocaliseTextString("#SCORE"), 255, 140, 0 );
 	gHUD.DrawHudString( DIVIDER_POS + xpos_rel, ypos, "/", 255, 140, 0 );
 	gHUD.DrawHudString( DEATHS_RANGE_MIN + xpos_rel + 5, ypos, CHudTextMessage::BufferedLocaliseTextString("#DEATHS"), 255, 140, 0 );
-	gHUD.DrawHudStringReverse( PING_RANGE_MAX + xpos_rel + 15, ypos, 0, CHudTextMessage::BufferedLocaliseTextString("#LATENCY"), 255, 140, 0 );
+	gHUD.DrawHudStringReverse( PING_RANGE_MAX + xpos_rel + 15, ypos, CHudTextMessage::BufferedLocaliseTextString("#LATENCY"), 255, 140, 0 );
+	gHUD.DrawHudStringReverse( VOICE_POS + xpos_rel + 15, ypos, CHudTextMessage::BufferedLocaliseTextString("#VOICE"), 255, 140, 0 );
 
 	list_slot += 1.2f;
 	ypos = ROW_TOP + ROW_RANGE_MIN + ( list_slot * ROW_GAP );
@@ -312,7 +313,7 @@ int CHudScoreboard::Draw( float fTime )
 
 		// draw kills (right to left)
 		xpos = KILLS_RANGE_MAX + xpos_rel;
-		gHUD.DrawHudNumberStringReverse( xpos, ypos, 0, team_info->frags, r, g, b );
+		gHUD.DrawHudNumberStringReverse( xpos, ypos, team_info->frags, r, g, b );
 
 		// draw divider
 		xpos = DIVIDER_POS + xpos_rel;
@@ -328,7 +329,7 @@ int CHudScoreboard::Draw( float fTime )
 		sprintf( buf, "%d/%d", team_info->ping, team_info->packetloss );
 		xpos = ( ( PING_RANGE_MAX - PING_RANGE_MIN ) / 2) + PING_RANGE_MIN + xpos_rel + 40;
 		UnpackRGB( r, g, b, gHUD.m_iDefaultHUDColor );
-		gHUD.DrawHudStringReverse( xpos, ypos, 0, buf, r, g, b );
+		gHUD.DrawHudStringReverse( xpos, ypos, buf, r, g, b );
 
 		team_info->already_drawn = TRUE;  // set the already_drawn to be TRUE, so this team won't get drawn again
 		list_slot++;
@@ -351,7 +352,7 @@ int CHudScoreboard::DrawPlayers( int xpos_rel, float list_slot, int nameoffset, 
 {
 	int FAR_RIGHT;
 
-	FAR_RIGHT = PING_RANGE_MAX + 5;
+	FAR_RIGHT = VOICE_POS + 5;
 
 	if( ( ScreenWidth >= 440 ) || ( ScreenWidth >= 520 ) )
 	{
@@ -448,7 +449,7 @@ int CHudScoreboard::DrawPlayers( int xpos_rel, float list_slot, int nameoffset, 
 
 		// draw kills (right to left)
 		xpos = KILLS_RANGE_MAX + xpos_rel;
-		gHUD.DrawHudNumberStringReverse( xpos, ypos, 0, g_PlayerExtraInfo[best_player].frags, r, g, b );
+		gHUD.DrawHudNumberStringReverse( xpos, ypos, g_PlayerExtraInfo[best_player].frags, r, g, b );
 
 		// draw divider
 		xpos = DIVIDER_POS + xpos_rel;
@@ -462,7 +463,10 @@ int CHudScoreboard::DrawPlayers( int xpos_rel, float list_slot, int nameoffset, 
 		static char buf[64];
 		sprintf( buf, "%d/%d", g_PlayerInfoList[best_player].ping, g_PlayerInfoList[best_player].packetloss );
 		xpos = ( ( PING_RANGE_MAX - PING_RANGE_MIN ) / 2 ) + PING_RANGE_MIN + xpos_rel + 40;
-		gHUD.DrawHudStringReverse( xpos, ypos, 0, buf, r, g, b );
+		gHUD.DrawHudStringReverse( xpos, ypos, buf, r, g, b );
+
+		xpos = VOICE_POS + xpos_rel;
+		GetClientVoiceMgr()->DrawNoVguiSpeakerIcon( xpos - 20, ypos - 5, best_player);
 
 		pl_info->name = NULL;  // set the name to be NULL, so this client won't get drawn again
 		list_slot++;
@@ -588,7 +592,7 @@ int CHudScoreboard::MsgFunc_TeamInfo( const char *pszName, int iSize, void *pbuf
 // accepts three values:
 //		string: team name
 //		short: teams kills
-//		short: teams deaths 
+//		short: teams deaths
 // if this message is never received, then scores will simply be the combined totals of the players.
 int CHudScoreboard::MsgFunc_TeamScore( const char *pszName, int iSize, void *pbuf )
 {
